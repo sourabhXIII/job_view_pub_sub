@@ -1,39 +1,46 @@
 server:
   port: 8081
-spring:
-  kafka:
-    consumer:
-      bootstrap-servers: localhost:9092
-      group-id: foo
-      auto-offset-reset: earliest
-      #            https://github.com/spring-cloud/spring-cloud-stream-binder-kafka/issues/142
-      #            key-deserializer: org.springframework.kafka.support.serializer.JsonDeSerializer
-      #            value-deserializer: org.springframework.kafka.support.serializer.JSONDeserializer
-      #            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      key-deserializer: null
-      value-deserializer: null
-    producer:
-      #            key-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      #            value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      key-deserializer: null
-      value-deserializer: null
+spring.kafka:
+  consumer:
+    bootstrap-servers: localhost:9092
+    group-id: foo
+    auto-offset-reset: earliest
+    #            https://github.com/spring-cloud/spring-cloud-stream-binder-kafka/issues/142
+    #            key-deserializer: org.springframework.kafka.support.serializer.JsonDeSerializer
+    #            value-deserializer: org.springframework.kafka.support.serializer.JSONDeserializer
+    #            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    key-deserializer: null
+    value-deserializer: null
+  producer:
+    #            key-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    #            value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    key-deserializer: null
+    value-deserializer: null
 
-      bindings:
-        input:
-          consumer:
-            auto-bind-dlq: true
-            republish-to-dlq: true
+  bindings.input.consumer:
+    auto-bind-dlq: true
+    republish-to-dlq: true
 
-  cloud:
-    stream:
-#      kafka.bindings:
-#        input:
-#          destination: job_board_views
-#        output:
-#          destination: job_boards
-      default-binder: kafka
+spring.cloud:
+  stream:
+    default-binder: kafka
+#    kafka.bindings:
+#      input:
+#        destination: job_board_views
+#      output:
+#        destination: job_boards
+
+#https://github.com/spring-cloud/spring-cloud-stream-binder-kafka/issues/635:
+spring.cloud.stream.kafka.streams.binder:
+  brokers: localhost
+  configuration:
+#    default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+#    default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    commit.interval.ms: 1000
+
 management:
   endpoints:
     web:
       exposure:
         include: bindings
+

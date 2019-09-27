@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/pub-sub")
 public class Controller {
@@ -23,7 +25,7 @@ public class Controller {
     }
 
     @PostMapping(value = "/publish")
-    public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
-        this.producer.sendMessage(message);
+    public void sendMessageToKafkaTopic(@RequestBody Map<String, Object> payload) {
+        this.producer.sendMessage(payload);
     }
 }
