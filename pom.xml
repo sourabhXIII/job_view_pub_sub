@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.phenom</groupId>
-    <artifactId>view_consumer</artifactId>
+    <artifactId>job-view-pub-pub</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>view_consumer</name>
+    <name>job-view-pub-pub</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -109,7 +109,16 @@
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>2.1.10.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-core</artifactId>
+            <version>3.1.10.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
